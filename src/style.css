@@ -70,3 +70,11 @@ body {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+footer {
+  display: flex;
+  justify-content: flex-start;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  padding: 41px;
+  font-size: larger;
+}
