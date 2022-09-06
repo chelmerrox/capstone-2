@@ -42,6 +42,13 @@
     "webpack-dev-server": "^4.10.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "lodash": "^4.17.21"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "async_hooks": false
   }
 }
