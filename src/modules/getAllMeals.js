@@ -1,6 +1,6 @@
-export const mealsContainer = document.querySelector('.meals-container');
+const mealsContainer = document.querySelector('.meals-container');
 
-export const displayMeals = (data) => {
+const displayMeals = (data) => {
   const grid = document.createElement('div');
   grid.classList.add('grid');
   
@@ -29,7 +29,7 @@ export const displayMeals = (data) => {
   });
 };
 
-export const getAllMeals = async () => {
+const getAllMeals = async () => {
   const options = {
     method: 'GET',
     headers: { 'Content-type': 'application/json; charset=UTF-8;"' },
@@ -39,3 +39,5 @@ export const getAllMeals = async () => {
     .then((response) => response.json())
     .then((data) => displayMeals(data.categories));
 };
+
+export default getAllMeals;
