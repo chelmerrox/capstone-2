@@ -6,6 +6,7 @@ import './style.css';
 
 /* app.use(cors({
   origin: "*",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
 })) */
 
 const mealsContainer = document.querySelector('.meals-container');
@@ -50,7 +51,8 @@ const displayMeals = (data) => {
 const getAllMeals = async () => {
   const options = {
     method: 'GET',
-    headers: { 'Content-type': 'application/json; charset=UTF-8;' },
+    headers: { 
+      'Content-type': 'application/json; charset=UTF-8; "Access-Control-Allow-Origin: *; Access-Control-Allow-Methods: POST, PUT, PATCH, GET, DELETE, OPTIONS;"' },
   };
 
   await fetch('https://www.themealdb.com/api/json/v1/1/categories.php', options)
