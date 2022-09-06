@@ -1,17 +1,16 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# TV Maze
+# Tasty Dishes
 
-> The Capstone 2 project.
+> The Tasty Dishes site that users can view, like & comment on their favorite dishes. Built with HTML, CSS, JavaScript, Webpack, Meals API & the Involvement API.
 
 ## Built With
 
 - HTML5
 - CSS3
-- Bootstrap
 - JavaScript
 - Webpack
-- TVMaze API
+- Meals API
 - Involvement API
 - Postman
 - Jest
@@ -26,7 +25,7 @@
 
 ## Live Demo
 
-[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/capstone-2-test/development/dist/index.html)
+[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/capstone-2/development/dist/index.html)
 
 ## Getting Started
 
@@ -84,7 +83,7 @@ $ npm start
 
 ## Collaborators
 
-👤 **Shakrizoda**  GitHub:    |    LinkedIn:  
+👤 **Shakhrizoda Yusupova** | GitHub: [@shyusu4](https://github.com/shyusu4)
 
 ## 🤝 Contributing
 
@@ -98,12 +97,13 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- My God & family
+- Our God & families
 - Microverse
-- Coding & Learning Partners
 - Morning Session Teams
 - Stand-Up Team
 - Microverse TSEs
+- [Meals API Documentation](https://www.themealdb.com/api.php)
+- [Involvement API Documentation](https://www.notion.so/Involvement-API-869e60b5ad104603aa6db59e08150270)
 
 ## 📝 License
 
