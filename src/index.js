@@ -1,7 +1,6 @@
 import './style.css';
 
 const mealsContainer = document.querySelector('.meals-container');
-let rowNum= [1,2];
 
 const displayMeals = (data) => {
   const grid = document.createElement('div');
