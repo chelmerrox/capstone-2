@@ -1,61 +1,44 @@
-/* var express = require('express')
-var cors = require('cors')
-var app = express() */
- 
 import './style.css';
-
-/* app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
-})) */
 
 const mealsContainer = document.querySelector('.meals-container');
 let rowNum= [1,2];
 
 const displayMeals = (data) => {
-  const row = document.createElement('div');
-
-  if (rowNum.length === 2){
-    row.classList.add(`row-${rowNum[0]}`);
-  } else {
-    row.classList.add(`row-${rowNum[1]}`);
-  }
+  const grid = document.createElement('div');
+  grid.classList.add('grid');
   
   data.forEach((mealData, i) => {
     const mealContainer = document.createElement('div');
     mealContainer.classList.add(`meal-${mealData.idCategory}-container`);
 
     mealContainer.innerHTML = `
-      <img src="${mealData.strCategoryThumb}" alt="Meal ${mealData.idCategory}"/>
+      <img src="${mealData.strCategoryThumb}" alt="Meal ${i + 1}"/>
 
-      <div class="name-and-likes">
-        <h3>Meal ${mealData.idCategory}</h3>
-        
-        <div>
-          <i class="material-icons">favorite_border</i>
-          <p class="likes"><span class="num-of-likes">5</span> likes</p>
-        </div>
+      <div class="name-and-like-icon-container">
+        <h3>${mealData.strCategory}</h3>
+        <i class="material-icons">favorite_border</i>
       </div>
-  
-      <button type="button" class="comments-btn">Comments</button>
-      <button type="button" class="reservations-btn">Reservations</button>
+      
+      <p class="likes-text"><span class="num-of-likes">5</span>likes</p>
+      
+      <div class="comment-and-reservations-container">
+        <button type="button" class="comments-btn">Comments</button>
+        <button type="button" class="reservations-btn">Reservations</button>
+      </div>
     `;
 
-    row.appendChild(mealContainer);
-    mealsContainer.appendChild(row);
+    grid.appendChild(mealContainer);
+    mealsContainer.appendChild(grid);
   });
-
-
 };
 
 const getAllMeals = async () => {
   const options = {
     method: 'GET',
-    headers: { 
-      'Content-type': 'application/json; charset=UTF-8; "Access-Control-Allow-Origin: *; Access-Control-Allow-Methods: POST, PUT, PATCH, GET, DELETE, OPTIONS;"' },
+    headers: { 'Content-type': 'application/json; charset=UTF-8;"' },
   };
 
-  await fetch('https://www.themealdb.com/api/json/v1/1/categories.php', options)
+  fetch('https://www.themealdb.com/api/json/v1/1/categories.php', options)
     .then((response) => response.json())
     .then((data) => displayMeals(data.categories));
 };
