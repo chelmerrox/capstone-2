@@ -71,6 +71,75 @@ body {
   transform-origin: bottom left;
 }
 
+.meals-container {
+  width: 100%;
+  height: 100%;
+  padding: 85px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 100px;
+  grid-row-gap: 100px;
+}
+
+/* All children of grid class */
+div.grid > div {
+  box-shadow: 0 2px 4px 0 rgba(37, 37, 37, 0.1);
+  padding: 42px 23px;
+}
+
+.name-and-like-icon-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.likes-text {
+  display: flex;
+  justify-content: flex-end;
+  color: #bc6c25;
+  font-size: large;
+  font-weight: 700;
+  margin-top: 9px;
+}
+
+.num-of-likes {
+  margin-right: 4px;
+}
+
+.comment-and-reservations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  margin-top: 35px;
+}
+
+.comments-btn,
+.reservations-btn {
+  border: 6px solid #2b3618;
+  background-color: #fefae0;
+  padding: 15px 15px;
+  width: 55%;
+  font-size: large;
+  font-weight: 700;
+  color: #2b3618;
+}
+
+.comments-btn:hover,
+.reservations-btn:hover {
+  background-color: #2b3618;
+  color: #fefae0;
+}
+
+.comments-btn:active,
+.reservations-btn:active {
+  border: 9px solid #5c7e36;
+}
+
 footer {
   display: flex;
   justify-content: flex-start;

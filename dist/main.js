@@ -1,3 +1,4 @@
+"use strict";
 /*
  * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
  * This devtool is neither made for production nor for readable output files.
@@ -6,9 +7,7 @@
  * or disable the default devtool with "devtool: false".
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
+(self["webpackChunkcapstone_2"] = self["webpackChunkcapstone_2"] || []).push([["main"],{
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/style.css":
 /*!*************************************************************!*\
@@ -16,7 +15,7 @@
   \*************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n___CSS_LOADER_EXPORT___.push([module.id, \"@import url(https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap);\"]);\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"* {\\n  margin: 0;\\n  padding: 0;\\n  box-sizing: border-box;\\n}\\n\\n:root {\\n  --olive-green: #606c38;\\n  --kombu-green: #283618;\\n  --cornsilk: #fefae0;\\n  --earth-yellow: #dda15e;\\n  --liver-dogs: #bc6c25;\\n}\\n\\nbody {\\n  font-family: 'Roboto', sans-serif;\\n}\\n\\n.navbar {\\n  display: flex;\\n  align-items: center;\\n  justify-content: space-between;\\n  padding: 1.5rem;\\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\\n}\\n\\n.nav-title {\\n  font-family: 'DM Serif Display', serif;\\n  font-size: 2.5rem;\\n  color: var(--olive-green);\\n}\\n\\n.nav-items {\\n  display: flex;\\n  flex-direction: row;\\n  list-style: none;\\n  font-size: 18px;\\n  text-transform: uppercase;\\n  font-weight: bold;\\n}\\n\\n.nav-items li {\\n  padding: 1rem;\\n}\\n\\n.nav-link {\\n  display: inline-block;\\n  position: relative;\\n  text-decoration: none;\\n  justify-content: space-evenly;\\n  color: black;\\n}\\n\\n.nav-link::after {\\n  content: '';\\n  position: absolute;\\n  width: 100%;\\n  transform: scaleX(0);\\n  height: 2px;\\n  bottom: 0;\\n  left: 0;\\n  background-color: var(--olive-green);\\n  transform-origin: bottom right;\\n  transition: transform 0.25s ease-out;\\n}\\n\\n.nav-link:hover::after {\\n  transform: scaleX(1);\\n  transform-origin: bottom left;\\n}\\n\\nfooter {\\n  display: flex;\\n  justify-content: flex-start;\\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\\n}\\n\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://capstone-2/./src/style.css?./node_modules/css-loader/dist/cjs.js");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n___CSS_LOADER_EXPORT___.push([module.id, \"@import url(https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap);\"]);\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \"* {\\n  margin: 0;\\n  padding: 0;\\n  box-sizing: border-box;\\n}\\n\\n:root {\\n  --olive-green: #606c38;\\n  --kombu-green: #283618;\\n  --cornsilk: #fefae0;\\n  --earth-yellow: #dda15e;\\n  --liver-dogs: #bc6c25;\\n}\\n\\nbody {\\n  font-family: 'Roboto', sans-serif;\\n}\\n\\n.navbar {\\n  display: flex;\\n  align-items: center;\\n  justify-content: space-between;\\n  padding: 1.5rem;\\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\\n}\\n\\n.nav-title {\\n  font-family: 'DM Serif Display', serif;\\n  font-size: 2.5rem;\\n  color: var(--olive-green);\\n}\\n\\n.nav-items {\\n  display: flex;\\n  flex-direction: row;\\n  list-style: none;\\n  font-size: 18px;\\n  text-transform: uppercase;\\n  font-weight: bold;\\n}\\n\\n.nav-items li {\\n  padding: 1rem;\\n}\\n\\n.nav-link {\\n  display: inline-block;\\n  position: relative;\\n  text-decoration: none;\\n  justify-content: space-evenly;\\n  color: black;\\n}\\n\\n.nav-link::after {\\n  content: '';\\n  position: absolute;\\n  width: 100%;\\n  transform: scaleX(0);\\n  height: 2px;\\n  bottom: 0;\\n  left: 0;\\n  background-color: var(--olive-green);\\n  transform-origin: bottom right;\\n  transition: transform 0.25s ease-out;\\n}\\n\\n.nav-link:hover::after {\\n  transform: scaleX(1);\\n  transform-origin: bottom left;\\n}\\n\\n.meals-container {\\n  width: 100%;\\n  height: 100%;\\n  padding: 85px;\\n}\\n\\n.grid {\\n  display: grid;\\n  grid-template-columns: repeat(3, 1fr);\\n  grid-template-rows: repeat(5, 1fr);\\n  grid-column-gap: 100px;\\n  grid-row-gap: 100px;\\n}\\n\\n/* All children of grid class */\\ndiv.grid > div {\\n  box-shadow: 0 2px 4px 0 rgba(37, 37, 37, 0.1);\\n  padding: 42px 23px;\\n}\\n\\n.name-and-like-icon-container {\\n  display: flex;\\n  justify-content: space-between;\\n  margin-top: 12px;\\n}\\n\\n.likes-text {\\n  display: flex;\\n  justify-content: flex-end;\\n  color: #bc6c25;\\n  font-size: large;\\n  font-weight: 700;\\n  margin-top: 9px;\\n}\\n\\n.num-of-likes {\\n  margin-right: 4px;\\n}\\n\\n.comment-and-reservations-container {\\n  display: flex;\\n  flex-direction: column;\\n  align-items: center;\\n  row-gap: 20px;\\n  margin-top: 35px;\\n}\\n\\n.comments-btn,\\n.reservations-btn {\\n  border: 6px solid #2b3618;\\n  background-color: #fefae0;\\n  padding: 15px 15px;\\n  width: 55%;\\n  font-size: large;\\n  font-weight: 700;\\n  color: #2b3618;\\n}\\n\\n.comments-btn:hover,\\n.reservations-btn:hover {\\n  background-color: #2b3618;\\n  color: #fefae0;\\n}\\n\\n.comments-btn:active,\\n.reservations-btn:active {\\n  border: 9px solid #5c7e36;\\n}\\n\\nfooter {\\n  display: flex;\\n  justify-content: flex-start;\\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);\\n  padding: 41px;\\n  font-size: larger;\\n}\\n\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://capstone-2/./src/style.css?./node_modules/css-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -116,88 +115,23 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\n\n//# sourceURL=webpack://capstone-2/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_getAllMeals_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/getAllMeals.js */ \"./src/modules/getAllMeals.js\");\n\n\n\n(0,_modules_getAllMeals_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n\n\n//# sourceURL=webpack://capstone-2/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/getAllMeals.js":
+/*!************************************!*\
+  !*** ./src/modules/getAllMeals.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst mealsContainer = document.querySelector('.meals-container');\r\n\r\nconst displayMeals = (data) => {\r\n  const grid = document.createElement('div');\r\n  grid.classList.add('grid');\r\n  \r\n  data.forEach((mealData, i) => {\r\n    const mealContainer = document.createElement('div');\r\n    mealContainer.classList.add(`meal-${mealData.idCategory}-container`);\r\n\r\n    mealContainer.innerHTML = `\r\n      <img src=\"${mealData.strCategoryThumb}\" alt=\"Meal ${i + 1}\"/>\r\n\r\n      <div class=\"name-and-like-icon-container\">\r\n        <h3>${mealData.strCategory}</h3>\r\n        <i class=\"material-icons\">favorite_border</i>\r\n      </div>\r\n      \r\n      <p class=\"likes-text\"><span class=\"num-of-likes\">5</span>likes</p>\r\n      \r\n      <div class=\"comment-and-reservations-container\">\r\n        <button type=\"button\" class=\"comments-btn\">Comments</button>\r\n        <button type=\"button\" class=\"reservations-btn\">Reservations</button>\r\n      </div>\r\n    `;\r\n\r\n    grid.appendChild(mealContainer);\r\n    mealsContainer.appendChild(grid);\r\n  });\r\n};\r\n\r\nconst getAllMeals = async () => {\r\n  const options = {\r\n    method: 'GET',\r\n    headers: { 'Content-type': 'application/json; charset=UTF-8;\"' },\r\n  };\r\n\r\n  fetch('https://www.themealdb.com/api/json/v1/1/categories.php', options)\r\n    .then((response) => response.json())\r\n    .then((data) => displayMeals(data.categories));\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getAllMeals);\n\n//# sourceURL=webpack://capstone-2/./src/modules/getAllMeals.js?");
 
 /***/ })
 
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/nonce */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nc = undefined;
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
-/******/ 	
-/******/ })()
-;
+},
+/******/ __webpack_require__ => { // webpackRuntimeModules
+/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+/******/ var __webpack_exports__ = (__webpack_exec__("./src/index.js"));
+/******/ }
+]);
