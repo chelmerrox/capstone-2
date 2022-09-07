@@ -1,9 +1,10 @@
 const mealsContainer = document.querySelector('.meals-container');
+const modalContainer = document.querySelector('.modal-container');
 
 const displayMeals = (data) => {
   const grid = document.createElement('div');
   grid.classList.add('grid');
-  
+
   data.forEach((mealData, i) => {
     const mealContainer = document.createElement('div');
     mealContainer.classList.add(`meal-${mealData.idCategory}-container`);
@@ -41,3 +42,37 @@ const getAllMeals = async () => {
 };
 
 export default getAllMeals;
+
+const displayModal = (img, category, desc) => {
+  const commentsModal = document.createElement('div');
+  commentsModal.classList.add('comments-modal');
+  commentsModal.innerHTML = `
+  <span><i>X</i></span>
+  <img src="${img}" />
+  <h2>${category}</h2>
+  <p class="description">${desc}</p>
+  <div>
+    <h3 class="comments">Comments</h3>
+    <ul class="comments-container">
+      <li class="comment"></li>
+    </ul>
+  </div>
+  <form>
+    <input type="text" placeholder="Your Name" />
+    <textarea placeholder="Your comment"></textarea>
+    <input type="button" value="Comment" />
+  </form>`;
+  modalContainer.appendChild(commentsModal);
+};
+
+export const displayModalData = () => {
+  getAllMeals().then((mealData) =>
+    displayModal(
+      mealData.strCategoryThumb,
+      mealData.strCategory,
+      mealData.strCategoryDescription
+    )
+  );
+};
+
+displayModal();

@@ -147,3 +147,16 @@ footer {
   padding: 41px;
   font-size: larger;
 }
+
+/* Modal */
+.comments-modal {
+  position: fixed;
+  z-index: 1;
+  left: 24rem;
+  top: 2rem;
+  height: 90vh;
+  width: 100vh;
+  overflow: hidden;
+  background-color: var(--cornsilk);
+  border: 5px solid var(--kombu-green);
+}
