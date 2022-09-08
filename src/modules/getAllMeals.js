@@ -1,4 +1,7 @@
+import Comments from './comments';
+const comments = new Comments();
 const mealsContainer = document.querySelector('.meals-container');
+
 //let dataModalTarget = [];
 let k = 0;
 let overlay;
@@ -55,16 +58,18 @@ const displayMeals = (data) => {
             <div>
               <br><h3 class="comments">Comments</h3>
             </div>
+            <ul class="user-comments"></ul>
             <form class="comments-form">
-              <input class="form-input" type="text" placeholder="Your Name" />
-              <textarea class="form-input" placeholder="Your Comment"></textarea>
-              <input class="comment-btn" type="button" value="Comment" />
+              <input class="form-input user" type="text" placeholder="Your Name" />
+              <textarea class="form-input comment" placeholder="Your Comment" rows="3"></textarea>
+              <input id="submitBtn"
+              class="submit-btn" type="button" value="Comment" />
             </form>
           </div>
         </div>
+        <div id="overlay"></div>
       </div>
     `;
-
     grid.appendChild(mealContainer);
     mealsContainer.appendChild(grid);
   });
@@ -91,6 +96,21 @@ const displayMeals = (data) => {
     closeModalButtons.addEventListener('click', () => {
       const modal = closeModalButtons.closest('.modal');
       closeModal(modal);
+    });
+
+    const userComments = document.querySelector('.user-comments');
+    const userName = document.querySelector('.user');
+    const userComment = document.querySelector('.comment');
+    const submitBtn = Array.from(document.querySelector('.submit-btn'));
+    submitBtn.forEach((btn, j) => {
+      const popup = document.querySelector('.modal');
+    });
+    submitBtn.addEventListener('click', () => {
+      if (userName.value !== '' && userComment.value !== '') {
+        comments.postComment(id, userName.value, userComment.value).then(() => {
+          userComments.innerHTML += `<li><span>${userName.value}:</span><span>${userComment.value}</span></li>`;
+        });
+      }
     });
   });
 };
