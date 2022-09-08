@@ -97,18 +97,22 @@ const displayMeals = (data) => {
       const modal = closeModalButtons.closest('.modal');
       closeModal(modal);
     });
+  });
 
-    const userComments = document.querySelector('.user-comments');
-    const userName = document.querySelector('.user');
-    const userComment = document.querySelector('.comment');
-    const submitBtn = Array.from(document.querySelector('.submit-btn'));
-    submitBtn.forEach((btn, j) => {
-      const popup = document.querySelector('.modal');
-    });
-    submitBtn.addEventListener('click', () => {
+  const userComments = Array.from(
+    document.getElementsByClassName('user-comments')
+  );
+  const submitBtns = Array.from(document.getElementsByClassName('submit-btn'));
+  submitBtns.forEach((btn, j) => {
+    btn.addEventListener('click', () => {
+      console.log(btn);
+      const userName = document.querySelector('.user');
+      const userComment = document.querySelector('.comment');
       if (userName.value !== '' && userComment.value !== '') {
-        comments.postComment(id, userName.value, userComment.value).then(() => {
-          userComments.innerHTML += `<li><span>${userName.value}:</span><span>${userComment.value}</span></li>`;
+        comments.postComment(j, userName.value, userComment.value).then(() => {
+          userComments[
+            j
+          ].innerHTML += `<li><span>${userName.value}:</span><span>${userComment.value}</span></li>`;
         });
       }
     });
