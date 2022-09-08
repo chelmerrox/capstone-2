@@ -16,6 +16,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #fffef5;
 }
 
 .navbar {
@@ -24,11 +25,12 @@ body {
   justify-content: space-between;
   padding: 1.5rem;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
 .nav-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 2.5rem;
+  font-size: 2.6rem;
   color: var(--olive-green);
 }
 
@@ -87,7 +89,9 @@ body {
 
 /* All children of grid class */
 div.grid > div {
-  box-shadow: 0 2px 4px 0 rgba(37, 37, 37, 0.1);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 15px;
   padding: 42px 23px;
 }
 
@@ -95,6 +99,17 @@ div.grid > div {
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
+}
+
+.like-icons:hover {
+  cursor: pointer;
+  color: magenta;
+}
+
+.like-icons:active {
+  cursor: pointer;
+  color: magenta;
+  font-weight: 800;
 }
 
 .likes-text {
@@ -118,13 +133,18 @@ div.grid > div {
   margin-top: 35px;
 }
 
+.dish-name {
+  font-size: 22px;
+}
+
 .comments-btn,
 .reservations-btn {
-  border: 6px solid #2b3618;
+  border: 3.5px solid #2b3618;
   background-color: #fefae0;
-  padding: 15px 15px;
+  padding: 10px;
+  border-radius: 15px;
   width: 55%;
-  font-size: large;
+  font-size: 15px;
   font-weight: 700;
   color: #2b3618;
 }
@@ -137,13 +157,88 @@ div.grid > div {
 
 .comments-btn:active,
 .reservations-btn:active {
-  border: 9px solid #5c7e36;
+  border: 3.5px solid #5c7e36;
+}
+
+/* Styles for the popup window/modal */
+.modal {
+  position: fixed;
+  top: 20rem;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid #1a2236;
+  z-index: 10;
+  background-color: white;
+  width: 50rem;
+  max-width: 83%;
+}
+
+.modal.active {
+  transform: translate(-43%, -43%) scale(1);
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 2rem;
+  font-weight: lighter;
+}
+
+.modal-body {
+  padding: 10px 15px;
+  position: relative;
+  overflow: hidden;
+  top: -24px;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.comments-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 20rem;
+}
+
+.form-input {
+  padding: 0.5rem;
+}
+
+.comment-btn {
+  width: 10rem;
 }
 
 footer {
   display: flex;
   justify-content: flex-start;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.11);
+  background-color: white;
   padding: 41px;
   font-size: larger;
 }
