@@ -28,13 +28,22 @@ const getAllComments = async (id, list) => {
         list.innerHTML += `<li><span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span></li>`;
       });
     });
-  const commentCounter = document.querySelector('.comment-counter');
-  commentCounter.innerHTML = countAllComments();
+  
+    const commentCounter = Array.from(document.getElementsByClassName('comment-counter'));
+  
+    commentCounter.forEach((counterText, j) => {
+      counterText.innerHTML = countAllComments();
+    });
 };
-
+  
 const countAllComments = () => {
-  const comments = document.querySelector('.user-comments');
-  return `(${comments.childElementCount})`;
+  const comments = Array.from(document.getElementsByClassName('.user-comments'));
+
+  comments.forEach((comment, i) => {
+    //let childrenCount = [comment.childElementCount, i];
+
+    return `${comment.childElementCount}`;
+  });
 };
 
 const getComment = async (id, list) => {
