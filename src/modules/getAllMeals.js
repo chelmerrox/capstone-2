@@ -1,8 +1,5 @@
-import Comments from './comments';
-const comments = new Comments();
 const mealsContainer = document.querySelector('.meals-container');
 
-//let dataModalTarget = [];
 let k = 0;
 let overlay;
 const dataModalTarget = [
@@ -21,6 +18,37 @@ const dataModalTarget = [
   'modal-13',
   'modal-14',
 ];
+
+const getComment = async (id, list) => {
+  const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments?item_id=${id}`)
+    .then ((response) => response.json())
+    .then ((data) => {
+      data.forEach((commentsData) => {
+        list.innerHTML += `<li><span>${commentsData.username}:</span><span>${commentsData.comment}</span></li>`;
+      });
+    });
+};
+
+const postComment = async (id, user, comment, list) => {
+  console.log(id);
+  console.log(user);
+  console.log(comment);
+
+  const options =   {
+    method: 'POST',
+    body: JSON.stringify({
+      item_id: id,
+      username: user,
+      comment: comment,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+    },
+  };
+
+  await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments', options)
+    .then(() => getComment(id, list));
+};
 
 const displayMeals = (data) => {
   const grid = document.createElement('div');
@@ -60,8 +88,8 @@ const displayMeals = (data) => {
             </div>
             <ul class="user-comments"></ul>
             <form class="comments-form">
-              <input class="form-input user" type="text" placeholder="Your Name" />
-              <textarea class="form-input comment" placeholder="Your Comment" rows="3"></textarea>
+              <input class="form-input user-${i+1}" type="text" placeholder="Your Name" />
+              <textarea class="form-input comment-${i+1}" placeholder="Your Comment" rows="3"></textarea>
               <input id="submitBtn"
               class="submit-btn" type="button" value="Comment" />
             </form>
@@ -70,16 +98,14 @@ const displayMeals = (data) => {
         <div id="overlay"></div>
       </div>
     `;
+
     grid.appendChild(mealContainer);
     mealsContainer.appendChild(grid);
   });
 
   dataModalTarget.forEach((id) => {
-    console.log(`id: ${id}`);
-
     // the open a Modal button
     const commentBtn1 = document.querySelector(`[data-modal-target='${id}']`);
-    console.log(commentBtn1);
 
     k += 1; // for the close-button-number class
     const closeModalButtons = document.querySelector(`.close-button-${k}`); // the close a Modal button
@@ -99,21 +125,17 @@ const displayMeals = (data) => {
     });
   });
 
-  const userComments = Array.from(
-    document.getElementsByClassName('user-comments')
-  );
+  const userComments = Array.from(document.getElementsByClassName('.user-comments'));
+  //const userComments = Array.from(document.querySelectorAll('ul'));
+
   const submitBtns = Array.from(document.getElementsByClassName('submit-btn'));
+  
   submitBtns.forEach((btn, j) => {
     btn.addEventListener('click', () => {
-      console.log(btn);
-      const userName = document.querySelector('.user');
-      const userComment = document.querySelector('.comment');
+      const userName = document.querySelector(`.user-${j+1}`);
+      const userComment = document.querySelector(`.comment-${j+1}`);
       if (userName.value !== '' && userComment.value !== '') {
-        comments.postComment(j, userName.value, userComment.value).then(() => {
-          userComments[
-            j
-          ].innerHTML += `<li><span>${userName.value}:</span><span>${userComment.value}</span></li>`;
-        });
+        postComment(j+1, userName.value, userComment.value, userComments[j]);
       }
     });
   });
