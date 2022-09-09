@@ -125,8 +125,7 @@ const displayMeals = (data) => {
     });
   });
 
-  const userComments = Array.from(document.getElementsByClassName('.user-comments'));
-  //const userComments = Array.from(document.querySelectorAll('ul'));
+  const userComments = Array.from(document.querySelectorAll('ul.user-comments'));
 
   const submitBtns = Array.from(document.getElementsByClassName('submit-btn'));
   
