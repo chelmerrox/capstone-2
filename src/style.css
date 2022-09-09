@@ -162,7 +162,7 @@ div.grid > div {
   border-radius: 15px;
   z-index: 10;
   background-color: white;
-  height: 40rem;
+  height: 42rem;
   width: 68rem;
   max-width: 90%;
   overflow-y: scroll;
@@ -223,7 +223,7 @@ div.grid > div {
 .comments {
   font-family: 'DM Serif Display', serif;
   color: #bc6c25;
-  font-size: 20px;
+  font-size: 1.2rem;
 }
 
 .comments-form input,
@@ -244,7 +244,7 @@ div.grid > div {
 
 .comments-form .submit-btn {
   background-color: #2b3618;
-  padding: 15px;
+  padding: 1%;
   border-radius: 15px;
   width: 20%;
   font-size: 1rem;
@@ -278,6 +278,8 @@ div.grid > div {
   flex-direction: column;
   align-items: center;
   margin: 1.5% 10%;
+  height: 10rem;
+  overflow-y: scroll;
 }
 
 /* All children of <ul> for user comments */
