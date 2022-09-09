@@ -1,14 +1,14 @@
 export const getComment = async (id) => {
-    const response = await fetch(
-      `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/nTyZtNP7uxSV8b3O2GI5/comments?item_id=${id}`
-    );
-    const data = await response.json();
+  const response = await fetch(
+    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/nTyZtNP7uxSV8b3O2GI5/comments?item_id=${id}`
+  );
+  const data = await response.json();
 
-    return data;
-  };
+  return data;
+};
 
 export const postComment = async (id, user, comment) => {
-  const options =   {
+  const options = {
     method: 'POST',
     body: JSON.stringify({
       item_id: id,
@@ -20,9 +20,11 @@ export const postComment = async (id, user, comment) => {
     },
   };
 
-  await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/nTyZtNP7uxSV8b3O2GI5/comments', options)
-    .then(() => getComment());
-  
+  await fetch(
+    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/nTyZtNP7uxSV8b3O2GI5/comments',
+    options
+  ).then(() => getComment());
+
   /* const response = await fetch(
       'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/nTyZtNP7uxSV8b3O2GI5/comments/',
       {
@@ -39,6 +41,5 @@ export const postComment = async (id, user, comment) => {
     ).then(() => getComment());
  */
 
-  
   console.log(`id in url: ${id}`);
 };

@@ -154,16 +154,18 @@ div.grid > div {
 /* Styles for the popup window/modal */
 .modal {
   position: fixed;
-  top: 20rem;
-  left: 50%;
+  top: 15rem;
+  left: 45%;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
   border: 1px solid #1a2236;
   border-radius: 15px;
   z-index: 10;
   background-color: white;
-  width: 50rem;
-  max-width: 83%;
+  height: 40rem;
+  width: 68rem;
+  max-width: 90%;
+  overflow-y: scroll;
 }
 
 .modal.active {
@@ -171,7 +173,7 @@ div.grid > div {
 }
 
 .modal-header {
-  padding: 19px 23px;
+  padding: 8px 20px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -190,39 +192,38 @@ div.grid > div {
 .modal-body {
   padding: 25px 40px;
   position: relative;
-  overflow: hidden;
   top: -24px;
 }
 
 .modal-body img {
-  margin: 0 29%;
+  margin: 0 30%;
 }
 
 .modal-body h2 {
   font-family: 'DM Serif Display', serif;
-  font-size: 31px;
+  font-size: 1.8rem;
   color: #2b3618;
 }
 
 .modal-body .description {
-  margin: 14px 0;
+  margin: 1% 0;
   text-align: justify;
-  line-height: 25px;
+  line-height: 20px;
 }
 
 .comments-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 0.8%;
 }
 
 .comments {
   font-family: 'DM Serif Display', serif;
   color: #bc6c25;
-  font-size: 23px;
+  font-size: 20px;
 }
 
 .comments-form input,
@@ -231,13 +232,13 @@ div.grid > div {
   border: 1px solid #787777;
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-  padding: 10px 12px;
+  padding: 1% 2%;
 }
 
 .comments-form input::placeholder,
 .comments-form textarea::placeholder {
   color: #787777;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: italic;
 }
 
@@ -245,8 +246,8 @@ div.grid > div {
   background-color: #2b3618;
   padding: 15px;
   border-radius: 15px;
-  width: 30%;
-  font-size: 15px;
+  width: 20%;
+  font-size: 1rem;
   font-weight: 700;
   color: #fefae0;
 }
@@ -270,12 +271,13 @@ div.grid > div {
 }
 
 /* <ul> for list of comments in popup window */
+
 .user-comments {
   list-style-type: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px 93px;
+  margin: 1.5% 10%;
 }
 
 /* All children of <ul> for user comments */
@@ -286,19 +288,20 @@ ul.user-comments > li {
   border-radius: 10px;
 }
 
-.user-comments li:nth-child(odd){
+.user-comments li:nth-child(odd) {
   background-color: #283618;
   color: #fefae0;
 }
 
-.user-comments li:nth-child(even){
+.user-comments li:nth-child(even) {
   background-color: #fefae0;
   color: #2b3618;
 }
 
 /* All children of <li> in user comments */
 .user-comments li > span {
-  font-size: 18px;
+  font-size: 16px;
+  padding-right: 8px;
 }
 
 #overlay {

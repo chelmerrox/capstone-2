@@ -20,11 +20,13 @@ const dataModalTarget = [
 ];
 
 const getComment = async (id, list) => {
-  const response = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments?item_id=${id}`)
-    .then ((response) => response.json())
-    .then ((data) => {
+  const response = await fetch(
+    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments?item_id=${id}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
       data.forEach((commentsData) => {
-        list.innerHTML += `<li><span>${commentsData.username}:</span><span>${commentsData.comment}</span></li>`;
+        list.innerHTML += `<li><span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span></li>`;
       });
     });
 };
@@ -34,7 +36,7 @@ const postComment = async (id, user, comment, list) => {
   console.log(user);
   console.log(comment);
 
-  const options =   {
+  const options = {
     method: 'POST',
     body: JSON.stringify({
       item_id: id,
@@ -46,8 +48,10 @@ const postComment = async (id, user, comment, list) => {
     },
   };
 
-  await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments', options)
-    .then(() => getComment(id, list));
+  await fetch(
+    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments',
+    options
+  ).then(() => getComment(id, list));
 };
 
 const displayMeals = (data) => {
@@ -88,8 +92,12 @@ const displayMeals = (data) => {
             </div>
             <ul class="user-comments"></ul>
             <form class="comments-form">
-              <input class="form-input user-${i+1}" type="text" placeholder="Your Name" />
-              <textarea class="form-input comment-${i+1}" placeholder="Your Comment" rows="3"></textarea>
+              <input class="form-input user-${
+                i + 1
+              }" type="text" placeholder="Your Name" />
+              <textarea class="form-input comment-${
+                i + 1
+              }" placeholder="Your Comment" rows="3"></textarea>
               <input id="submitBtn"
               class="submit-btn" type="button" value="Comment" />
             </form>
@@ -125,16 +133,18 @@ const displayMeals = (data) => {
     });
   });
 
-  const userComments = Array.from(document.querySelectorAll('ul.user-comments'));
+  const userComments = Array.from(
+    document.querySelectorAll('ul.user-comments')
+  );
 
   const submitBtns = Array.from(document.getElementsByClassName('submit-btn'));
-  
+
   submitBtns.forEach((btn, j) => {
     btn.addEventListener('click', () => {
-      const userName = document.querySelector(`.user-${j+1}`);
-      const userComment = document.querySelector(`.comment-${j+1}`);
+      const userName = document.querySelector(`.user-${j + 1}`);
+      const userComment = document.querySelector(`.comment-${j + 1}`);
       if (userName.value !== '' && userComment.value !== '') {
-        postComment(j+1, userName.value, userComment.value, userComments[j]);
+        postComment(j + 1, userName.value, userComment.value, userComments[j]);
       }
     });
   });
