@@ -1,5 +1,4 @@
 const mealsContainer = document.querySelector('.meals-container');
-
 let k = 0;
 let overlay;
 const dataModalTarget = [
@@ -18,6 +17,7 @@ const dataModalTarget = [
   'modal-13',
   'modal-14',
 ];
+const involvementAPIComments = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments';
 
 const getComment = async (id, list) => {
   const response = await fetch(
@@ -32,10 +32,6 @@ const getComment = async (id, list) => {
 };
 
 const postComment = async (id, user, comment, list) => {
-  console.log(id);
-  console.log(user);
-  console.log(comment);
-
   const options = {
     method: 'POST',
     body: JSON.stringify({
@@ -49,7 +45,7 @@ const postComment = async (id, user, comment, list) => {
   };
 
   await fetch(
-    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments',
+    involvementAPIComments,
     options
   ).then(() => getComment(id, list));
 };
@@ -161,7 +157,7 @@ const getAllMeals = async () => {
     .then((data) => displayMeals(data.categories));
 };
 
-function openModal(modal) {
+const openModal = (modal) => {
   if (modal === null) {
     return;
   }
@@ -169,7 +165,7 @@ function openModal(modal) {
   overlay.classList.add('active');
 }
 
-function closeModal(modal) {
+const closeModal = (modal) => {
   if (modal === null) {
     return;
   }
