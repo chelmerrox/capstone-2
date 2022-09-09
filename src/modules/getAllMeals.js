@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 const mealsContainer = document.querySelector('.meals-container');
 let k = 0;
 let overlay;
@@ -33,19 +32,20 @@ const getAllComments = async (id, list) => {
       });
     });
 
-  const commentCounter = Array.from(
-    document.getElementsByClassName('comment-counter')
-  );
-  commentCounter.forEach((counterText, j) => {
-    counterText.innerHTML = countAllComments();
-  });
+    const commentCounter = Array.from(document.getElementsByClassName('comment-counter'));
+    const comments = Array.from(document.querySelectorAll('ul.user-comments'));
+  
+    commentCounter.forEach((counterText, j) => {
+      counterText.innerHTML = ` (${comments[j].childElementCount})`;
+    });
 };
 
 const countAllComments = () => {
-  const comments = Array.from(
-    document.getElementsByClassName('.user-comments')
-  );
-  return `(${comments.length})`;
+  const comments = Array.from(document.getElementsByClassName('.user-comments'));
+    
+  comments.forEach((comment, i) => {
+    return `${comment.length}`;
+  })
 };
 
 const getComment = async (id, list) => {
@@ -59,6 +59,18 @@ const getComment = async (id, list) => {
           const li = document.createElement('li');
           li.innerHTML = `<span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span>`;
           list.appendChild(li);
+        }
+      });
+
+      const commentCounter = Array.from(document.getElementsByClassName('comment-counter'));
+      const comments = Array.from(document.querySelectorAll('ul.user-comments'));
+    
+      console.log(commentCounter);
+      console.log(comments);
+
+      commentCounter.forEach((counterText, k) => {
+        if (id === k + 1){
+          counterText.innerHTML = ` (${comments[k].childElementCount})`;
         }
       });
     });
