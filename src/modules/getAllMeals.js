@@ -32,20 +32,16 @@ const getAllComments = async (id, list) => {
       });
     });
 
-    const commentCounter = Array.from(document.getElementsByClassName('comment-counter'));
-    const comments = Array.from(document.querySelectorAll('ul.user-comments'));
-  
-    commentCounter.forEach((counterText, j) => {
-      counterText.innerHTML = ` (${comments[j].childElementCount})`;
-    });
+    countAllComments();
 };
 
 const countAllComments = () => {
-  const comments = Array.from(document.getElementsByClassName('.user-comments'));
-    
-  comments.forEach((comment, i) => {
-    return `${comment.length}`;
-  })
+  const commentCounter = Array.from(document.getElementsByClassName('comment-counter'));
+  const comments = Array.from(document.querySelectorAll('ul.user-comments'));
+  
+  commentCounter.forEach((counterText, j) => {
+    counterText.innerHTML = ` (${comments[j].childElementCount})`;
+  });
 };
 
 const getComment = async (id, list) => {
@@ -64,9 +60,6 @@ const getComment = async (id, list) => {
 
       const commentCounter = Array.from(document.getElementsByClassName('comment-counter'));
       const comments = Array.from(document.querySelectorAll('ul.user-comments'));
-    
-      console.log(commentCounter);
-      console.log(comments);
 
       commentCounter.forEach((counterText, k) => {
         if (id === k + 1){
