@@ -20,12 +20,30 @@ const dataModalTarget = [
 const involvementAPIComments =
   'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments';
 
-const getComment = async (id, list) => {
+const getAllComments = async (id, list) => {
   await fetch(`${involvementAPIComments}?item_id=${id}`)
     .then((response) => response.json())
     .then((data) => {
       data.forEach((commentsData) => {
         list.innerHTML += `<li><span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span></li>`;
+      });
+    });
+};
+
+const getComment = async (id, list) => {
+  await fetch(`${involvementAPIComments}?item_id=${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let lastElement = data.length - 1;
+      
+      data.forEach((commentsData, j) => {
+        if (j === lastElement){
+          const li = document.createElement('li');
+
+          li.innerHTML = `<span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span>`;
+
+          list.appendChild(li);
+        }
       });
     });
 };
@@ -133,9 +151,12 @@ const displayMeals = (data) => {
       const userComment = document.querySelector(`.comment-${j + 1}`);
       if (userName.value !== '' && userComment.value !== '') {
         postComment(j + 1, userName.value, userComment.value, userComments[j]);
+
+        userName.value = '';
+        userComment.value = '';
       }
     });
-    getComment(j + 1, userComments[j]);
+    getAllComments(j + 1, userComments[j]);
   });
 };
 
