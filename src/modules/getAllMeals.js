@@ -17,11 +17,10 @@ const dataModalTarget = [
   'modal-13',
   'modal-14',
 ];
-let numOfClicks = 0;
 
 const involvementAPILikes = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/likes/';
 
-const displayLike = (data, itemID, numOfClicks) => {
+const displayLike = (data, itemID) => {
   const likeIcons = Array.from(document.getElementsByClassName('like-icons'));
   let num;
 
@@ -42,7 +41,7 @@ const displayLike = (data, itemID, numOfClicks) => {
   });
 }
 
-const getLike = async (itemID, numOfClicks) => {
+const getLike = async (itemID) => {
   const options = {
     method: 'GET',
     headers: {'Content-type': 'application/json; charset=UTF-8'},
@@ -51,11 +50,11 @@ const getLike = async (itemID, numOfClicks) => {
   await fetch(involvementAPILikes, options)
     .then((response) => response.json())
     .then((data) => {
-      displayLike(data, itemID, numOfClicks)
+      displayLike(data, itemID)
     });
 };
 
-const addLike = async (itemID, numOfClicks) => {
+const addLike = async (itemID) => {
   const options = {
     method: 'POST',
     headers: {'Content-type': 'application/json; charset=UTF-8'} ,
@@ -65,20 +64,35 @@ const addLike = async (itemID, numOfClicks) => {
   }
 
   await fetch(involvementAPILikes, options)
-    .then(() => getLike(itemID, numOfClicks));
+    .then(() => getLike(itemID));
 };
 
-const displayAllLikes = async (itemID, data) => {
-  const numOfLikes = Array.from(document.getElementsByClassName('.num-of-likes'));
+// To help sort the data array of objs in ascending order according to item_id value
+const compare = (a,b) => {
+  let numA = parseInt(a.item_id.substring(5));
+  let numB = parseInt(b.item_id.substring(5));
 
-  data.forEach((info) => {
-    numOfLikes.forEach((likeNumText) => {
-      likeNumText.innerHTML += `${info.likes}`;
-    })
+  if (numA < numB){
+    return -1
+  };
+};
+
+const displayAllLikes = async (data) => {
+  const numOfLikes = Array.from(document.querySelectorAll('p .num-of-likes'));
+
+  data.sort(compare);
+
+  data.forEach((info, i) => {
+    numOfLikes.forEach((likeNumText, j) => {
+      let num = j + 1;
+      if (i === j){
+        likeNumText.innerHTML = `${info.likes}`;
+      }
+    });
   });
 };
 
-const getAllLikes = async (itemID) => {
+const getAllLikes = async () => {
   const options = {
     method: 'GET',
     headers: { 'Content-type': 'application/json; charset=UTF-8' },
@@ -86,7 +100,7 @@ const getAllLikes = async (itemID) => {
 
   await fetch(involvementAPILikes, options)
     .then((response) => response.json())
-    .then((data) => displayLikes(itemID, data));
+    .then((data) => displayAllLikes(data));
 }
 
 const displayMeals = (data) => {
@@ -151,14 +165,13 @@ const displayMeals = (data) => {
       e.preventDefault();
 
       itemID = e.target.id;
-      numOfClicks += 1;
 
       console.log(itemID);
 
-      addLike(itemID, numOfClicks);
+      addLike(itemID);
     });
 
-    getAllLikes(itemID);
+    getAllLikes();
   });
 
   dataModalTarget.forEach((id) => {
