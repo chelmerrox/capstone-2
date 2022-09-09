@@ -1,3 +1,4 @@
+import fetch from 'cross-fetch';
 const mealsContainer = document.querySelector('.meals-container');
 let k = 0;
 let overlay;
@@ -17,8 +18,11 @@ const dataModalTarget = [
   'modal-13',
   'modal-14',
 ];
+
 const involvementAPIComments =
   'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments';
+const involvementAPILikes =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/likes/';
 
 const getAllComments = async (id, list) => {
   await fetch(`${involvementAPIComments}?item_id=${id}`)
@@ -28,22 +32,20 @@ const getAllComments = async (id, list) => {
         list.innerHTML += `<li><span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span></li>`;
       });
     });
-  
-    const commentCounter = Array.from(document.getElementsByClassName('comment-counter'));
-  
-    commentCounter.forEach((counterText, j) => {
-      counterText.innerHTML = countAllComments();
-    });
-};
-  
-const countAllComments = () => {
-  const comments = Array.from(document.getElementsByClassName('.user-comments'));
 
-  comments.forEach((comment, i) => {
-    //let childrenCount = [comment.childElementCount, i];
-
-    return `${comment.childElementCount}`;
+  const commentCounter = Array.from(
+    document.getElementsByClassName('comment-counter')
+  );
+  commentCounter.forEach((counterText, j) => {
+    counterText.innerHTML = countAllComments();
   });
+};
+
+const countAllComments = () => {
+  const comments = Array.from(
+    document.getElementsByClassName('.user-comments')
+  );
+  return `(${comments.length})`;
 };
 
 const getComment = async (id, list) => {
@@ -76,6 +78,84 @@ const postComment = async (id, user, comment, list) => {
   }).then(() => getComment(id, list));
 };
 
+const displayLike = (data, itemID) => {
+  const likeIcons = Array.from(document.getElementsByClassName('like-icons'));
+  let num;
+
+  likeIcons.forEach((icon, j) => {
+    num = j + 1;
+    if (icon.getAttribute('id') === itemID) {
+      data.forEach((likesData) => {
+        if (likesData.item_id === itemID) {
+          //<span> tag that holds the number of likes
+          const likeNum = document.querySelector(`.likes-num-${num}`);
+          likeNum.innerHTML = `${likesData.likes}`;
+          icon.style.color = 'magenta';
+        }
+      });
+    }
+  });
+};
+
+const getLike = async (itemID) => {
+  const options = {
+    method: 'GET',
+    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+  };
+
+  await fetch(involvementAPILikes, options)
+    .then((response) => response.json())
+    .then((data) => {
+      displayLike(data, itemID);
+    });
+};
+
+const addLike = async (itemID) => {
+  const options = {
+    method: 'POST',
+    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    body: JSON.stringify({
+      item_id: itemID,
+    }),
+  };
+  await fetch(involvementAPILikes, options).then(() => getLike(itemID));
+};
+
+// To help sort the data array of objs in ascending order according to item_id value
+const compare = (a, b) => {
+  let numA = parseInt(a.item_id.substring(5));
+  let numB = parseInt(b.item_id.substring(5));
+
+  if (numA < numB) {
+    return -1;
+  }
+};
+
+const displayAllLikes = async (data) => {
+  const numOfLikes = Array.from(document.querySelectorAll('p .num-of-likes'));
+
+  data.sort(compare);
+
+  data.forEach((info, i) => {
+    numOfLikes.forEach((likeNumText, j) => {
+      if (i === j) {
+        likeNumText.innerHTML = `${info.likes}`;
+      }
+    });
+  });
+};
+
+const getAllLikes = async () => {
+  const options = {
+    method: 'GET',
+    headers: { 'Content-type': 'application/json; charset=UTF-8' },
+  };
+
+  await fetch(involvementAPILikes, options)
+    .then((response) => response.json())
+    .then((data) => displayAllLikes(data));
+};
+
 const displayMeals = (data) => {
   const grid = document.createElement('div');
   grid.classList.add('grid');
@@ -83,28 +163,31 @@ const displayMeals = (data) => {
   data.forEach((mealData, i) => {
     const mealContainer = document.createElement('div');
     mealContainer.classList.add(`meal-${mealData.idCategory}-container`);
-
+    mealContainer.setAttribute('id', 'card-item');
     mealContainer.innerHTML = `
       <img src="${mealData.strCategoryThumb}" alt="Meal ${i + 1}"/>
  
       <div class="name-and-like-icon-container">
         <h3 class="dish-name">${mealData.strCategory}</h3>
-        <i class="material-icons">favorite_border</i>
+        <i class="material-icons like-icons" id="like-${
+          i + 1
+        }">favorite_border</i>
       </div>
-     
-      <p class="likes-text"><span class="num-of-likes">5</span>likes</p>
-     
+      
+      <p class="likes-text"><span class="num-of-likes likes-num-${
+        i + 1
+      }">0</span>likes</p>
+      
       <div class="comment-and-reservations-container">
         <button type="button" class="comments-btn modal-${i + 1}"
         data-modal-target="modal-${mealData.idCategory}">Comments</button>
- 
+
         <!--Popup window container for Comments Button-->
         <div class="modal popup-${i + 1}" id="modal-${i + 1}">
           <div class="modal-header">
             <span class="close-button close-button-${i + 1}
             data-close-button"><i>X</i></span>
           </div>
- 
           <div class="modal-body">
             <img src="${mealData.strCategoryThumb}" />
             <h2>${mealData.strCategory}</h2>
@@ -131,6 +214,18 @@ const displayMeals = (data) => {
 
     grid.appendChild(mealContainer);
     mealsContainer.appendChild(grid);
+  });
+  countAllMeals();
+  // For the like icons
+  const likeIcons = Array.from(document.getElementsByClassName('like-icons'));
+  let itemID;
+  likeIcons.forEach((icon) => {
+    icon.addEventListener('click', (e) => {
+      e.preventDefault();
+      itemID = e.target.id;
+      addLike(itemID);
+    });
+    getAllLikes();
   });
 
   dataModalTarget.forEach((id) => {
@@ -185,6 +280,12 @@ const getAllMeals = async () => {
     .then((data) => displayMeals(data.categories));
 };
 
+const countAllMeals = () => {
+  const itemCounter = document.querySelector('.item-counter');
+  const cardItems = document.querySelectorAll('#card-item');
+  itemCounter.textContent = `(${cardItems.length})`;
+};
+
 const openModal = (modal) => {
   if (modal === null) {
     return;
@@ -201,4 +302,4 @@ const closeModal = (modal) => {
   overlay.classList.remove('active');
 };
 
-export default getAllMeals;
+export default getAllMeals();

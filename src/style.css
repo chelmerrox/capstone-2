@@ -101,6 +101,17 @@ div.grid > div {
   margin-top: 12px;
 }
 
+.like-icons:hover {
+  cursor: pointer;
+  color: magenta;
+}
+
+.like-icons:active {
+  cursor: pointer;
+  color: magenta;
+  font-weight: 800;
+}
+
 .likes-text {
   display: flex;
   justify-content: flex-end;

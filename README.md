@@ -27,6 +27,10 @@
 
 [Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/capstone-2/development/dist/index.html)
 
+## Video Presentation
+
+![Our Video Presentation]()
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
