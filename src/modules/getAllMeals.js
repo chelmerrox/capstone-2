@@ -27,19 +27,19 @@ const displayLike = (data, itemID) => {
   likeIcons.forEach((icon, j) => {
     num = j + 1;
     if (icon.getAttribute('id') === itemID){
-      data.forEach((likesData, k) => {
+      data.forEach((likesData) => {
         if (likesData.item_id === itemID){
 
           //<span> tag that holds the number of likes
           const likeNum = document.querySelector(`.likes-num-${num}`);
 
-          likeNum.innerHTML = `${likesData.likes}`
+          likeNum.innerHTML = `${likesData.likes}`;
           icon.style.color = 'magenta';
         }
       });
     }
   });
-}
+};
 
 const getLike = async (itemID) => {
   const options = {
@@ -50,7 +50,7 @@ const getLike = async (itemID) => {
   await fetch(involvementAPILikes, options)
     .then((response) => response.json())
     .then((data) => {
-      displayLike(data, itemID)
+      displayLike(data, itemID);
     });
 };
 
@@ -61,7 +61,7 @@ const addLike = async (itemID) => {
     body: JSON.stringify({
       item_id : itemID
     }),
-  }
+  };
 
   await fetch(involvementAPILikes, options)
     .then(() => getLike(itemID));
@@ -73,8 +73,8 @@ const compare = (a,b) => {
   let numB = parseInt(b.item_id.substring(5));
 
   if (numA < numB){
-    return -1
-  };
+    return -1;
+  }
 };
 
 const displayAllLikes = async (data) => {
@@ -84,7 +84,6 @@ const displayAllLikes = async (data) => {
 
   data.forEach((info, i) => {
     numOfLikes.forEach((likeNumText, j) => {
-      let num = j + 1;
       if (i === j){
         likeNumText.innerHTML = `${info.likes}`;
       }
@@ -101,7 +100,7 @@ const getAllLikes = async () => {
   await fetch(involvementAPILikes, options)
     .then((response) => response.json())
     .then((data) => displayAllLikes(data));
-}
+};
 
 const displayMeals = (data) => {
   const grid = document.createElement('div');
@@ -160,13 +159,11 @@ const displayMeals = (data) => {
 
   let itemID;
 
-  likeIcons.forEach((icon, j) => {
+  likeIcons.forEach((icon) => {
     icon.addEventListener('click', (e) => {
       e.preventDefault();
 
       itemID = e.target.id;
-
-      console.log(itemID);
 
       addLike(itemID);
     });
@@ -214,7 +211,7 @@ const openModal = (modal) => {
   }
   modal.classList.add('active');
   overlay.classList.add('active');
-}
+};
 
 const closeModal = (modal) => {
   if (modal === null) {
@@ -222,6 +219,6 @@ const closeModal = (modal) => {
   }
   modal.classList.remove('active');
   overlay.classList.remove('active');
-}
+};
 
 export default getAllMeals();
