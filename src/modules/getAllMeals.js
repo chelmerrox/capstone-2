@@ -1,5 +1,4 @@
 const mealsContainer = document.querySelector('.meals-container');
-//let dataModalTarget = [];
 let k = 0;
 let overlay;
 const dataModalTarget = [
@@ -21,21 +20,22 @@ const dataModalTarget = [
 let numOfClicks = 0;
 
 const involvementAPILikes = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/likes/';
-//const involvementAPILikes = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/nTyZtNP7uxSV8b3O2GI5/likes';
 
 const displayLike = (data, itemID, numOfClicks) => {
   const likeIcons = Array.from(document.getElementsByClassName('like-icons'));
+  let num;
 
   likeIcons.forEach((icon, j) => {
-    if (itemID.includes(`${j + 1}`) && j === (j + 1) - 1) {
-      data.forEach((info, k) => {
-        // <span> tag
-        const likeNum = document.querySelector(`.likes-num-${k + 1}`);
-        if (info.item_id === itemID && numOfClicks%2 !== 0){
-          likeNum.innerHTML = `${info.likes}`
+    num = j + 1;
+    if (icon.getAttribute('id') === itemID){
+      data.forEach((likesData, k) => {
+        if (likesData.item_id === itemID){
+
+          //<span> tag that holds the number of likes
+          const likeNum = document.querySelector(`.likes-num-${num}`);
+
+          likeNum.innerHTML = `${likesData.likes}`
           icon.style.color = 'magenta';
-        } else if (info.item_id === itemID && numOfClicks%2 === 0) {
-          icon.style.color = 'black';
         }
       });
     }
@@ -51,15 +51,6 @@ const getLike = async (itemID, numOfClicks) => {
   await fetch(involvementAPILikes, options)
     .then((response) => response.json())
     .then((data) => {
-      //extract numeric string from ID, changing it to a number
-      //then, subtracting one to get array index
-      let num = (parseInt(itemID.substring(5))) - 1;
-
-      // Update will only work if there was a PUT method in the Involvement API Docs
-      if (numOfClicks%2 === 0){
-        data[num].likes = data[num].likes - 1;
-      }
-
       displayLike(data, itemID, numOfClicks)
     });
 };
@@ -77,17 +68,17 @@ const addLike = async (itemID, numOfClicks) => {
     .then(() => getLike(itemID, numOfClicks));
 };
 
-const displayLikes = async (data) => {
+const displayAllLikes = async (itemID, data) => {
   const numOfLikes = Array.from(document.getElementsByClassName('.num-of-likes'));
 
   data.forEach((info) => {
     numOfLikes.forEach((likeNumText) => {
-      likeNumText.innerHTML = `${info.likes}`;
+      likeNumText.innerHTML += `${info.likes}`;
     })
   });
 };
 
-export const getAllLikes = async () => {
+const getAllLikes = async (itemID) => {
   const options = {
     method: 'GET',
     headers: { 'Content-type': 'application/json; charset=UTF-8' },
@@ -95,7 +86,7 @@ export const getAllLikes = async () => {
 
   await fetch(involvementAPILikes, options)
     .then((response) => response.json())
-    .then((data) => displayLikes(data));
+    .then((data) => displayLikes(itemID, data));
 }
 
 const displayMeals = (data) => {
@@ -150,6 +141,26 @@ const displayMeals = (data) => {
     mealsContainer.appendChild(grid);
   });
 
+  // For the like icons
+  const likeIcons = Array.from(document.getElementsByClassName('like-icons'));
+
+  let itemID;
+
+  likeIcons.forEach((icon, j) => {
+    icon.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      itemID = e.target.id;
+      numOfClicks += 1;
+
+      console.log(itemID);
+
+      addLike(itemID, numOfClicks);
+    });
+
+    getAllLikes(itemID);
+  });
+
   dataModalTarget.forEach((id) => {
     // the open a Modal button
     const commentBtn1 = document.querySelector(`[data-modal-target='${id}']`);
@@ -171,23 +182,9 @@ const displayMeals = (data) => {
       closeModal(modal);
     });
   });
-
-  // For the like icons
-  const likeIcons = Array.from(document.getElementsByClassName('like-icons'));
-
-  likeIcons.forEach((icon, j) => {
-    icon.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      let itemID = e.target.id;
-      numOfClicks += 1;
-
-      addLike(itemID, numOfClicks);
-    });
-  });
 };
 
-export const getAllMeals = async () => {
+const getAllMeals = async () => {
   const options = {
     method: 'GET',
     headers: { 'Content-type': 'application/json; charset=UTF-8;"' },
@@ -198,7 +195,7 @@ export const getAllMeals = async () => {
     .then((data) => displayMeals(data.categories));
 };
 
-function openModal(modal) {
+const openModal = (modal) => {
   if (modal === null) {
     return;
   }
@@ -206,10 +203,12 @@ function openModal(modal) {
   overlay.classList.add('active');
 }
 
-function closeModal(modal) {
+const closeModal = (modal) => {
   if (modal === null) {
     return;
   }
   modal.classList.remove('active');
   overlay.classList.remove('active');
 }
+
+export default getAllMeals();
