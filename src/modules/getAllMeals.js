@@ -280,7 +280,7 @@ const getAllMeals = async () => {
     .then((data) => displayMeals(data.categories));
 };
 
-const countAllMeals = () => {
+export const countAllMeals = () => {
   const itemCounter = document.querySelector('.item-counter');
   const cardItems = document.querySelectorAll('#card-item');
   itemCounter.textContent = `(${cardItems.length})`;
