@@ -77,25 +77,25 @@ const displayMeals = (data) => {
 
     mealContainer.innerHTML = `
       <img src="${mealData.strCategoryThumb}" alt="Meal ${i + 1}"/>
-
+ 
       <div class="name-and-like-icon-container">
         <h3 class="dish-name">${mealData.strCategory}</h3>
         <i class="material-icons">favorite_border</i>
       </div>
-      
+     
       <p class="likes-text"><span class="num-of-likes">5</span>likes</p>
-      
+     
       <div class="comment-and-reservations-container">
         <button type="button" class="comments-btn modal-${i + 1}"
         data-modal-target="modal-${mealData.idCategory}">Comments</button>
-
+ 
         <!--Popup window container for Comments Button-->
         <div class="modal popup-${i + 1}" id="modal-${i + 1}">
           <div class="modal-header">
             <span class="close-button close-button-${i + 1}
             data-close-button"><i>X</i></span>
           </div>
-
+ 
           <div class="modal-body">
             <img src="${mealData.strCategoryThumb}" />
             <h2>${mealData.strCategory}</h2>
