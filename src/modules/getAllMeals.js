@@ -17,12 +17,11 @@ const dataModalTarget = [
   'modal-13',
   'modal-14',
 ];
-const involvementAPIComments = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments';
+const involvementAPIComments =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments';
 
 const getComment = async (id, list) => {
-  const response = await fetch(
-    `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments?item_id=${id}`
-  )
+  await fetch(`${involvementAPIComments}?item_id=${id}`)
     .then((response) => response.json())
     .then((data) => {
       data.forEach((commentsData) => {
@@ -32,7 +31,7 @@ const getComment = async (id, list) => {
 };
 
 const postComment = async (id, user, comment, list) => {
-  const options = {
+  await fetch(involvementAPIComments, {
     method: 'POST',
     body: JSON.stringify({
       item_id: id,
@@ -40,14 +39,9 @@ const postComment = async (id, user, comment, list) => {
       comment: comment,
     }),
     headers: {
-      'Content-type': 'application/json; charset=utf-8',
+      'Content-type': 'application/json',
     },
-  };
-
-  await fetch(
-    involvementAPIComments,
-    options
-  ).then(() => getComment(id, list));
+  }).then(() => getComment(id, list));
 };
 
 const displayMeals = (data) => {
@@ -132,9 +126,7 @@ const displayMeals = (data) => {
   const userComments = Array.from(
     document.querySelectorAll('ul.user-comments')
   );
-
   const submitBtns = Array.from(document.getElementsByClassName('submit-btn'));
-
   submitBtns.forEach((btn, j) => {
     btn.addEventListener('click', () => {
       const userName = document.querySelector(`.user-${j + 1}`);
@@ -143,6 +135,7 @@ const displayMeals = (data) => {
         postComment(j + 1, userName.value, userComment.value, userComments[j]);
       }
     });
+    getComment(j + 1, userComments[j]);
   });
 };
 
@@ -163,7 +156,7 @@ const openModal = (modal) => {
   }
   modal.classList.add('active');
   overlay.classList.add('active');
-}
+};
 
 const closeModal = (modal) => {
   if (modal === null) {
@@ -171,6 +164,6 @@ const closeModal = (modal) => {
   }
   modal.classList.remove('active');
   overlay.classList.remove('active');
-}
+};
 
 export default getAllMeals;
