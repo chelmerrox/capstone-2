@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --olive-green: #606c38;
+  --kombu-green: #283618;
+  --cornsilk: #fefae0;
+  --earth-yellow: #dda15e;
+  --liver-dogs: #bc6c25;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #fffef5;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.nav-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.6rem;
+  color: var(--olive-green);
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.nav-items li {
+  padding: 1rem;
+}
+
+.nav-link {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  justify-content: space-evenly;
+  color: black;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--olive-green);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.meals-container {
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 36px;
+  grid-row-gap: 100px;
+}
+
+/* All children of grid class */
+div.grid > div {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 15px;
+  padding: 42px 23px;
+}
+
+.name-and-like-icon-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.like-icons:hover {
+  cursor: pointer;
+  color: magenta;
+}
+
+.like-icons:active {
+  cursor: pointer;
+  color: magenta;
+  font-weight: 800;
+}
+
+.likes-text {
+  display: flex;
+  justify-content: flex-end;
+  color: #bc6c25;
+  font-size: large;
+  font-weight: 700;
+  margin-top: 9px;
+}
+
+.num-of-likes {
+  margin-right: 4px;
+}
+
+.comment-and-reservations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  margin-top: 35px;
+}
+
+.dish-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 27px;
+  color: #2b3618;
+}
+
+.comments-btn,
+.reservations-btn {
+  border: 3.5px solid #2b3618;
+  background-color: #fefae0;
+  padding: 10px;
+  border-radius: 15px;
+  width: 55%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2b3618;
+}
+
+.comments-btn:hover,
+.reservations-btn:hover {
+  background-color: #2b3618;
+  color: #fefae0;
+}
+
+.comments-btn:active,
+.reservations-btn:active {
+  border: 3.5px solid #5c7e36;
+}
+
+/* Styles for the popup window/modal */
+.modal {
+  position: fixed;
+  top: 15rem;
+  left: 45%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid #1a2236;
+  border-radius: 15px;
+  z-index: 10;
+  background-color: white;
+  height: 42rem;
+  width: 68rem;
+  max-width: 90%;
+  overflow-y: scroll;
+}
+
+.modal.active {
+  transform: translate(-43%, -30%) scale(1);
+}
+
+.modal-header {
+  padding: 8px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 2rem;
+  font-weight: lighter;
+}
+
+/* Styles for the content in modal body */
+.modal-body {
+  padding: 25px 40px;
+  position: relative;
+  top: -24px;
+}
+
+.modal-body img {
+  margin: 0 30%;
+}
+
+.modal-body h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: #2b3618;
+}
+
+.modal-body .description {
+  margin: 1% 0;
+  text-align: justify;
+  line-height: 20px;
+}
+
+.comments-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin-top: 0.8%;
+}
+
+.comments {
+  font-family: 'DM Serif Display', serif;
+  color: #bc6c25;
+  font-size: 1.2rem;
+}
+
+.comments-form input,
+.comments-form textarea {
+  width: 55%;
+  border: 1px solid #787777;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  padding: 1% 2%;
+}
+
+.comments-form input::placeholder,
+.comments-form textarea::placeholder {
+  color: #787777;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.comments-form .submit-btn {
+  background-color: #2b3618;
+  padding: 1%;
+  border-radius: 15px;
+  width: 20%;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fefae0;
+}
+
+.comments-form .submit-btn:hover {
+  border: 3.5px solid #2b3618;
+  background-color: #fefae0;
+  color: #2b3618;
+}
+
+.comments-form .submit-btn:active {
+  border: 3.5px solid #5c7e36;
+}
+
+.form-input {
+  padding: 0.5rem;
+}
+
+.comment-btn {
+  width: 10rem;
+}
+
+/* <ul> for list of comments in popup window */
+
+.user-comments {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5% 10%;
+  height: 10rem;
+  overflow-y: scroll;
+}
+
+/* All children of <ul> for user comments */
+ul.user-comments > li {
+  padding: 10px 20px;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.user-comments li:nth-child(odd) {
+  background-color: #283618;
+  color: #fefae0;
+}
+
+.user-comments li:nth-child(even) {
+  background-color: #fefae0;
+  color: #2b3618;
+}
+
+/* All children of <li> in user comments */
+.user-comments li > span {
+  font-size: 16px;
+  padding-right: 8px;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-start;
+  box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.11);
+  background-color: white;
+  padding: 41px;
+  font-size: larger;
+}
