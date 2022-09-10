@@ -53,18 +53,18 @@ export const countAllComments = () => {
 const getAllComments = async (id, list) => {
   const response = await fetch(`${involvementAPIComments}?item_id=${id}`);
   const data = await response.json();
-    
+
   data.forEach((commentsData) => {
     list.innerHTML += `<li class="comment-item"><span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span></li>`;
   });
-    
+
   countAllComments();
 };
 
 const getComment = async (id, list) => {
   const response = await fetch(`${involvementAPIComments}?item_id=${id}`);
   const data = await response.json();
-  
+
   const lastElement = data.length - 1;
 
   data.forEach((commentsData, j) => {
@@ -99,12 +99,13 @@ const postComment = async (id, user, comment, list) => {
     }),
     headers: {
       'Content-type': 'application/json',
-    }, 
-  }
+    },
+  };
 
+  /* eslint-disable */
   const response = await fetch(involvementAPIComments, options);
-  
-  getComment(id,list);
+
+  getComment(id, list);
 };
 
 const displayLike = (data, itemID) => {
@@ -134,9 +135,8 @@ const getLike = async (itemID) => {
 
   const response = await fetch(involvementAPILikes, options);
   const data = await response.json();
-    
+
   displayLike(data, itemID);
-    
 };
 
 const addLike = async (itemID) => {
@@ -147,7 +147,7 @@ const addLike = async (itemID) => {
       item_id: itemID,
     }),
   };
-  
+
   await fetch(involvementAPILikes, options).then(() => getLike(itemID));
 };
 
