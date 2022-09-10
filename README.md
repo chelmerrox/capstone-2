@@ -29,7 +29,7 @@
 
 ## Video Presentation
 
-![Our Video Presentation](https://drive.google.com/file/d/1SslhVUuj_avxqUBqyttCz0siSX6MpvB8/view?usp=sharing)
+[Our Video Presentation](https://drive.google.com/file/d/1SslhVUuj_avxqUBqyttCz0siSX6MpvB8/view?usp=sharing)
 
 ## Getting Started
 
