@@ -76,14 +76,14 @@ body {
 .meals-container {
   width: 100%;
   height: 100%;
-  padding: 85px;
+  padding: 50px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 100px;
+  grid-column-gap: 36px;
   grid-row-gap: 100px;
 }
 
@@ -134,7 +134,9 @@ div.grid > div {
 }
 
 .dish-name {
-  font-size: 22px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 27px;
+  color: #2b3618;
 }
 
 .comments-btn,
@@ -163,23 +165,26 @@ div.grid > div {
 /* Styles for the popup window/modal */
 .modal {
   position: fixed;
-  top: 20rem;
-  left: 50%;
+  top: 15rem;
+  left: 45%;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
   border: 1px solid #1a2236;
+  border-radius: 15px;
   z-index: 10;
   background-color: white;
-  width: 50rem;
-  max-width: 83%;
+  height: 42rem;
+  width: 68rem;
+  max-width: 90%;
+  overflow-y: scroll;
 }
 
 .modal.active {
-  transform: translate(-43%, -43%) scale(1);
+  transform: translate(-43%, -30%) scale(1);
 }
 
 .modal-header {
-  padding: 10px 15px;
+  padding: 8px 20px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -194,11 +199,122 @@ div.grid > div {
   font-weight: lighter;
 }
 
+/* Styles for the content in modal body */
 .modal-body {
-  padding: 10px 15px;
+  padding: 25px 40px;
   position: relative;
-  overflow: hidden;
   top: -24px;
+}
+
+.modal-body img {
+  margin: 0 30%;
+}
+
+.modal-body h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: #2b3618;
+}
+
+.modal-body .description {
+  margin: 1% 0;
+  text-align: justify;
+  line-height: 20px;
+}
+
+.comments-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin-top: 0.8%;
+}
+
+.comments {
+  font-family: 'DM Serif Display', serif;
+  color: #bc6c25;
+  font-size: 1.2rem;
+}
+
+.comments-form input,
+.comments-form textarea {
+  width: 55%;
+  border: 1px solid #787777;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  padding: 1% 2%;
+}
+
+.comments-form input::placeholder,
+.comments-form textarea::placeholder {
+  color: #787777;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.comments-form .submit-btn {
+  background-color: #2b3618;
+  padding: 1%;
+  border-radius: 15px;
+  width: 20%;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fefae0;
+}
+
+.comments-form .submit-btn:hover {
+  border: 3.5px solid #2b3618;
+  background-color: #fefae0;
+  color: #2b3618;
+}
+
+.comments-form .submit-btn:active {
+  border: 3.5px solid #5c7e36;
+}
+
+.form-input {
+  padding: 0.5rem;
+}
+
+.comment-btn {
+  width: 10rem;
+}
+
+/* <ul> for list of comments in popup window */
+
+.user-comments {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5% 10%;
+  height: 10rem;
+  overflow-y: scroll;
+}
+
+/* All children of <ul> for user comments */
+ul.user-comments > li {
+  padding: 10px 20px;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.user-comments li:nth-child(odd) {
+  background-color: #283618;
+  color: #fefae0;
+}
+
+.user-comments li:nth-child(even) {
+  background-color: #fefae0;
+  color: #2b3618;
+}
+
+/* All children of <li> in user comments */
+.user-comments li > span {
+  font-size: 16px;
+  padding-right: 8px;
 }
 
 #overlay {
@@ -216,22 +332,6 @@ div.grid > div {
 #overlay.active {
   opacity: 1;
   pointer-events: all;
-}
-
-.comments-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  width: 20rem;
-}
-
-.form-input {
-  padding: 0.5rem;
-}
-
-.comment-btn {
-  width: 10rem;
 }
 
 footer {
