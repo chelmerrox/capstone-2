@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch';
+
 const mealsContainer = document.querySelector('.meals-container');
 let k = 0;
 let overlay;
@@ -19,10 +20,35 @@ const dataModalTarget = [
   'modal-14',
 ];
 
-const involvementAPIComments =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments';
-const involvementAPILikes =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/likes/';
+const involvementAPIComments = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/comments';
+const involvementAPILikes = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/52ymOtxpjWvVDyNrJLWi/likes/';
+
+const openModal = (modal) => {
+  if (modal === null) {
+    return;
+  }
+  modal.classList.add('active');
+  overlay.classList.add('active');
+};
+
+const closeModal = (modal) => {
+  if (modal === null) {
+    return;
+  }
+  modal.classList.remove('active');
+  overlay.classList.remove('active');
+};
+
+export const countAllComments = () => {
+  const commentCounter = Array.from(
+    document.getElementsByClassName('comment-counter'),
+  );
+  const comments = Array.from(document.querySelectorAll('ul.user-comments'));
+
+  commentCounter.forEach((counterText, j) => {
+    counterText.innerHTML = ` (${comments[j].childElementCount})`;
+  });
+};
 
 const getAllComments = async (id, list) => {
   await fetch(`${involvementAPIComments}?item_id=${id}`)
@@ -36,22 +62,11 @@ const getAllComments = async (id, list) => {
   countAllComments();
 };
 
-export const countAllComments = () => {
-  const commentCounter = Array.from(
-    document.getElementsByClassName('comment-counter')
-  );
-  const comments = Array.from(document.querySelectorAll('ul.user-comments'));
-
-  commentCounter.forEach((counterText, j) => {
-    counterText.innerHTML = ` (${comments[j].childElementCount})`;
-  });
-};
-
 const getComment = async (id, list) => {
   await fetch(`${involvementAPIComments}?item_id=${id}`)
     .then((response) => response.json())
     .then((data) => {
-      let lastElement = data.length - 1;
+      const lastElement = data.length - 1;
 
       data.forEach((commentsData, j) => {
         if (j === lastElement) {
@@ -62,10 +77,10 @@ const getComment = async (id, list) => {
       });
 
       const commentCounter = Array.from(
-        document.getElementsByClassName('comment-counter')
+        document.getElementsByClassName('comment-counter'),
       );
       const comments = Array.from(
-        document.querySelectorAll('ul.user-comments')
+        document.querySelectorAll('ul.user-comments'),
       );
 
       commentCounter.forEach((counterText, k) => {
@@ -82,7 +97,7 @@ const postComment = async (id, user, comment, list) => {
     body: JSON.stringify({
       item_id: id,
       username: user,
-      comment: comment,
+      comment,
     }),
     headers: {
       'Content-type': 'application/json',
@@ -99,7 +114,7 @@ const displayLike = (data, itemID) => {
     if (icon.getAttribute('id') === itemID) {
       data.forEach((likesData) => {
         if (likesData.item_id === itemID) {
-          //<span> tag that holds the number of likes
+          // <span> tag that holds the number of likes
           const likeNum = document.querySelector(`.likes-num-${num}`);
           likeNum.innerHTML = `${likesData.likes}`;
           icon.style.color = 'magenta';
@@ -133,10 +148,17 @@ const addLike = async (itemID) => {
   await fetch(involvementAPILikes, options).then(() => getLike(itemID));
 };
 
+export const countAllMeals = () => {
+  const itemCounter = document.querySelector('.item-counter');
+  const cardItems = document.querySelectorAll('#card-item');
+  itemCounter.textContent = `(${cardItems.length})`;
+};
+
 // To help sort the data array of objs in ascending order according to item_id value
+/* eslint-disable */
 const compare = (a, b) => {
-  let numA = parseInt(a.item_id.substring(5));
-  let numB = parseInt(b.item_id.substring(5));
+  const numA = parseInt(a.item_id.substring(5));
+  const numB = parseInt(b.item_id.substring(5));
 
   if (numA < numB) {
     return -1;
@@ -182,13 +204,13 @@ const displayMeals = (data) => {
       <div class="name-and-like-icon-container">
         <h3 class="dish-name">${mealData.strCategory}</h3>
         <i class="material-icons like-icons" id="like-${
-          i + 1
-        }">favorite_border</i>
+  i + 1
+}">favorite_border</i>
       </div>
       
       <p class="likes-text"><span class="num-of-likes likes-num-${
-        i + 1
-      }">0</span>likes</p>
+  i + 1
+}">0</span>likes</p>
       
       <div class="comment-and-reservations-container">
         <button type="button" class="comments-btn modal-${i + 1}"
@@ -210,11 +232,11 @@ const displayMeals = (data) => {
             <ul class="user-comments"></ul>
             <form class="comments-form">
               <input class="form-input user-${
-                i + 1
-              }" type="text" placeholder="Your Name" />
+  i + 1
+}" type="text" placeholder="Your Name" />
               <textarea class="form-input comment-${
-                i + 1
-              }" placeholder="Your Comment" rows="3"></textarea>
+  i + 1
+}" placeholder="Your Comment" rows="3"></textarea>
               <input id="submitBtn"
               class="submit-btn" type="button" value="Comment" />
             </form>
@@ -263,7 +285,7 @@ const displayMeals = (data) => {
   });
 
   const userComments = Array.from(
-    document.querySelectorAll('ul.user-comments')
+    document.querySelectorAll('ul.user-comments'),
   );
   const submitBtns = Array.from(document.getElementsByClassName('submit-btn'));
   submitBtns.forEach((btn, j) => {
@@ -290,28 +312,6 @@ const getAllMeals = async () => {
   fetch('https://www.themealdb.com/api/json/v1/1/categories.php', options)
     .then((response) => response.json())
     .then((data) => displayMeals(data.categories));
-};
-
-export const countAllMeals = () => {
-  const itemCounter = document.querySelector('.item-counter');
-  const cardItems = document.querySelectorAll('#card-item');
-  itemCounter.textContent = `(${cardItems.length})`;
-};
-
-const openModal = (modal) => {
-  if (modal === null) {
-    return;
-  }
-  modal.classList.add('active');
-  overlay.classList.add('active');
-};
-
-const closeModal = (modal) => {
-  if (modal === null) {
-    return;
-  }
-  modal.classList.remove('active');
-  overlay.classList.remove('active');
 };
 
 export default getAllMeals();

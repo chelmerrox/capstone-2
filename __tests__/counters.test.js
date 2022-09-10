@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { countAllMeals } from '../src/modules/getAllMeals';
+import { countAllMeals } from '../src/modules/getAllMeals.js';
 import '@testing-library/jest-dom';
 
 test('counts card items', () => {
