@@ -25,7 +25,7 @@
 
 ## Live Demo
 
-[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/capstone-2/development/dist/index.html)
+[Live Demo Link from ./dist/index.html](https://raw.githack.com/chelmerrox/capstone-2/comments-feature/dist/index.html)
 
 ## Video Presentation
 
@@ -76,6 +76,34 @@ $ npm run build
 $ npm start
 
 ```
+
+### Instructions to disable CORS/Web security to see the site
+
+1. For Windows OS & Google Chrome Browser, open your Windows Command prompt
+
+2. Navigate to the file path where chrome.exe file exists
+
+      a. Either in this file path
+
+      ```bash
+      $ C:\Program Files (x86)\Google\Chrome\Application
+
+      ```
+
+      b. Or this file path
+
+      ```bash
+      $ C:\Program Files\Google\Chrome\Application
+
+      ```
+3. To disable CORS & Web security to be able to see the site, run this command in the CMD. It opens a new unsecure instance of Google Chrome browser.
+
+```bash
+$ chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
+
+```
+
+4. Paste in the url of the site in the new unsecure instance (new window) of Google Chrome. (Use either the local host or the live version url)
 
 ## Author
 
