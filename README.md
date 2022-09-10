@@ -76,6 +76,7 @@ $ npm run build
 $ npm start
 
 ```
+---------------------------------------------------------------------------------------------------------------------
 
 ### Instructions to disable CORS/Web security to see the site
 
@@ -103,7 +104,7 @@ $ chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
 
 ```
 
-4. Paste in the url of the site in the new unsecure instance (new window) of Google Chrome. (Use either the local host or the live version url)
+4. Paste in the url of the site in the new unsecure instance (new window) of Google Chrome. (Use either the local host or the live version url provided)
 
 ## Author
 
