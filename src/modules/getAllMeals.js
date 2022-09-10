@@ -45,54 +45,52 @@ export const countAllComments = () => {
   );
   const comments = Array.from(document.querySelectorAll('ul.user-comments'));
 
-  commentCounter.forEach((counterText, j) => {
-    counterText.innerHTML = ` (${comments[j].childElementCount})`;
+  commentCounter.forEach((counterText, index) => {
+    counterText.innerHTML = ` (${comments[index].childElementCount})`;
   });
 };
 
 const getAllComments = async (id, list) => {
-  await fetch(`${involvementAPIComments}?item_id=${id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((commentsData) => {
-        list.innerHTML += `<li class="comment-item"><span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span></li>`;
-      });
-    });
-
+  const response = await fetch(`${involvementAPIComments}?item_id=${id}`);
+  const data = await response.json();
+    
+  data.forEach((commentsData) => {
+    list.innerHTML += `<li class="comment-item"><span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span></li>`;
+  });
+    
   countAllComments();
 };
 
 const getComment = async (id, list) => {
-  await fetch(`${involvementAPIComments}?item_id=${id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      const lastElement = data.length - 1;
+  const response = await fetch(`${involvementAPIComments}?item_id=${id}`);
+  const data = await response.json();
+  
+  const lastElement = data.length - 1;
 
-      data.forEach((commentsData, j) => {
-        if (j === lastElement) {
-          const li = document.createElement('li');
-          li.innerHTML = `<span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span>`;
-          list.appendChild(li);
-        }
-      });
+  data.forEach((commentsData, j) => {
+    if (j === lastElement) {
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${commentsData.creation_date}</span><span>${commentsData.username}</span><span>: ${commentsData.comment}</span>`;
+      list.appendChild(li);
+    }
+  });
 
-      const commentCounter = Array.from(
-        document.getElementsByClassName('comment-counter'),
-      );
-      const comments = Array.from(
-        document.querySelectorAll('ul.user-comments'),
-      );
+  const commentCounter = Array.from(
+    document.getElementsByClassName('comment-counter'),
+  );
+  const comments = Array.from(
+    document.querySelectorAll('ul.user-comments'),
+  );
 
-      commentCounter.forEach((counterText, k) => {
-        if (id === k + 1) {
-          counterText.innerHTML = `(${comments[k].childElementCount})`;
-        }
-      });
-    });
+  commentCounter.forEach((counterText, k) => {
+    if (id === k + 1) {
+      counterText.innerHTML = `(${comments[k].childElementCount})`;
+    }
+  });
 };
 
 const postComment = async (id, user, comment, list) => {
-  await fetch(involvementAPIComments, {
+  const options = {
     method: 'POST',
     body: JSON.stringify({
       item_id: id,
@@ -101,8 +99,12 @@ const postComment = async (id, user, comment, list) => {
     }),
     headers: {
       'Content-type': 'application/json',
-    },
-  }).then(() => getComment(id, list));
+    }, 
+  }
+
+  const response = await fetch(involvementAPIComments, options);
+  
+  getComment(id,list);
 };
 
 const displayLike = (data, itemID) => {
@@ -130,11 +132,11 @@ const getLike = async (itemID) => {
     headers: { 'Content-type': 'application/json; charset=UTF-8' },
   };
 
-  await fetch(involvementAPILikes, options)
-    .then((response) => response.json())
-    .then((data) => {
-      displayLike(data, itemID);
-    });
+  const response = await fetch(involvementAPILikes, options);
+  const data = await response.json();
+    
+  displayLike(data, itemID);
+    
 };
 
 const addLike = async (itemID) => {
@@ -145,6 +147,7 @@ const addLike = async (itemID) => {
       item_id: itemID,
     }),
   };
+  
   await fetch(involvementAPILikes, options).then(() => getLike(itemID));
 };
 
@@ -165,7 +168,7 @@ const compare = (a, b) => {
   }
 };
 
-const displayAllLikes = async (data) => {
+const displayAllLikes = (data) => {
   const numOfLikes = Array.from(document.querySelectorAll('p .num-of-likes'));
 
   data.sort(compare);
@@ -185,9 +188,10 @@ const getAllLikes = async () => {
     headers: { 'Content-type': 'application/json; charset=UTF-8' },
   };
 
-  await fetch(involvementAPILikes, options)
-    .then((response) => response.json())
-    .then((data) => displayAllLikes(data));
+  const response = await fetch(involvementAPILikes, options);
+  const data = await response.json();
+  
+  displayAllLikes(data);
 };
 
 const displayMeals = (data) => {
@@ -309,9 +313,10 @@ const getAllMeals = async () => {
     headers: { 'Content-type': 'application/json; charset=UTF-8;"' },
   };
 
-  fetch('https://www.themealdb.com/api/json/v1/1/categories.php', options)
-    .then((response) => response.json())
-    .then((data) => displayMeals(data.categories));
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php', options)
+  const data = await response.json();
+  
+  displayMeals(data.categories);
 };
 
 export default getAllMeals();
